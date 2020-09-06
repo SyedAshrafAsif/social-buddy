@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useParams } from 'react-router-dom';
 import Comments from '../Comments/Comments';
-import image from '../../fakeData/image';
 
 const useStyles = makeStyles({
   root: {
@@ -52,19 +51,7 @@ const PostDetails = () => {
         .then(response => response.json())
         .then(data => setComments(data))
     }, [postId])
-    
-    /*const fakeData = image; */
-    const [images, setImages] = useState([]);
-    useEffect(() => {
-      const commentsLength = 5;
-      const image_url = `https://randomuser.me/api/?results=${commentsLength}&inc=picture`;
-      fetch(image_url)
-          .then(res => res.json())
-          .then(data => setImages(data.results))
-          .catch(err => console.log(err))
-  }, [postId])
-    
-
+  
     return (
         <div>
             <Card className={classes.root, classes.size} variant="outlined">
@@ -87,7 +74,7 @@ const PostDetails = () => {
             <div>   
                 <h2 style={{color: 'steelBlue', textAlign: 'center'}}>Top Comments</h2>             
                 {
-                    comments.map(comment => <Comments comments={comment} images={images}></Comments>)
+                    comments.map(comment => <Comments comments={comment}></Comments>)
                 }                                
             </div> 
         </div>
